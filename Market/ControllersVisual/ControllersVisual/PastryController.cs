@@ -1,10 +1,9 @@
-﻿
+﻿using DataVisual;
 using Shop.Data;
-using Shop.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Shop.Controllers
+namespace ControllersVisual
 {
     /// <summary>
     /// Provides the link between the database and the UI. 
@@ -15,10 +14,6 @@ namespace Shop.Controllers
         /// Database link.
         /// </summary>
         private ShopContext context;
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="shopContext"></param>
         public PastryController(ShopContext shopContext)
         {
             context = shopContext;
