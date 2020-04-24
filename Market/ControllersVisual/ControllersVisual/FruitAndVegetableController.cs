@@ -1,5 +1,4 @@
 ﻿using DataVisual;
-using Shop.Data;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,17 +13,14 @@ namespace ControllersVisual
         /// Database link.
         /// </summary>
         private ShopContext context;
-        public FruitAndVegetableController(ShopContext shopContext)
-        {
-            context = shopContext;
-        }
+
         /// <summary>
         /// Gives all fruits and vegetables in the database.
         /// </summary>
         /// <returns>all fruits and vegetables from the database</returns>
         public List<FruitAndVegetable> GetAllFruitsAndVegetables()
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 return context.FruitsAndVegetables.ToList();
             }
@@ -37,7 +33,7 @@ namespace ControllersVisual
         /// <returns>a fruit or vegetable with that id</returns>
         public FruitAndVegetable GetFruitOrVegetableById(int id)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 return context.FruitsAndVegetables.FirstOrDefault(m => m.Id == id);
             }
@@ -49,7 +45,7 @@ namespace ControllersVisual
         /// <param name="fruitORvegetable">the fruit or vegetable that will be added.</param>
         public void Add(FruitAndVegetable fruitORvegetable)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 context.FruitsAndVegetables.Add(fruitORvegetable);
                 context.SaveChanges();
@@ -62,7 +58,7 @@ namespace ControllersVisual
         /// <param name="fruitORvegetable">the fruit or vegetable that will be updated.</param>
         public void Update(FruitAndVegetable fruitORvegetable)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 var item = context.FruitsAndVegetables.Find(fruitORvegetable.Id);
                 if (item != null)
@@ -79,7 +75,7 @@ namespace ControllersVisual
         /// <param name="id">Id of the wanted fruit or vegetable.</param>
         public void Delete(int id)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 var item = context.FruitsAndVegetables.FirstOrDefault(m => m.Id == id);
                 if (item != null)

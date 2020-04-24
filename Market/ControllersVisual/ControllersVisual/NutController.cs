@@ -1,5 +1,4 @@
 ﻿using DataVisual;
-using Shop.Data;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -14,10 +13,6 @@ namespace ControllersVisual
         /// Database link.
         /// </summary>
         private ShopContext context;
-        public NutController(ShopContext shopContext)
-        {
-            context = shopContext;
-        }
 
         /// <summary>
         /// Gives all Nuts in the database.
@@ -25,7 +20,7 @@ namespace ControllersVisual
         /// <returns>all nuts from the database</returns>
         public List<Nut> GetAllNuts()
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 return context.Nuts.ToList();
             }
@@ -38,7 +33,7 @@ namespace ControllersVisual
         /// <returns>a nut with that id</returns>
         public Nut GetNutById(int id) 
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 return context.Nuts.FirstOrDefault(m => m.Id == id);
             }
@@ -50,7 +45,7 @@ namespace ControllersVisual
         /// <param name="nut">the nut that will be added</param>
         public void Add(Nut nut)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 context.Nuts.Add(nut);
                 context.SaveChanges();
@@ -63,7 +58,7 @@ namespace ControllersVisual
         /// <param name="nut">the nut that will be updated</param>
         public void Update(Nut nut)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 var item = context.Drinks.Find(nut.Id);
                 if (item != null)
@@ -80,7 +75,7 @@ namespace ControllersVisual
         /// <param name="id">Id of the wanted nut</param>
         public void Delete(int id)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 var item = context.Nuts.FirstOrDefault(m => m.Id == id);
                 if (item != null)

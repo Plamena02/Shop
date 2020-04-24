@@ -1,6 +1,6 @@
 ﻿using DataVisual;
-using Shop.Data;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace ControllersVisual
@@ -12,18 +12,13 @@ namespace ControllersVisual
     {
         private ShopContext context;
 
-        public DrinkController(ShopContext shopContext)
-        {
-            context = shopContext;
-        }
-
         /// <summary>
         /// Gives all Drinks in the database.
         /// </summary>
         /// <returns>all drinks from the database</returns>
         public List<Drink> GetAllDrinks()
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 return context.Drinks.ToList();
             }
@@ -36,7 +31,7 @@ namespace ControllersVisual
         /// <returns>a drink with wanted id</returns>
         public Drink GetDrinkById(int id)
         {
-            using (context)
+            using (context = new ShopContext())
             {
 
                 return context.Drinks.FirstOrDefault(m => m.Id == id);
@@ -49,7 +44,7 @@ namespace ControllersVisual
         /// <param name="drink">the drink that will be added</param>
         public void Add(Drink drink)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 context.Drinks.Add(drink);
                 context.SaveChanges();
@@ -62,7 +57,7 @@ namespace ControllersVisual
         /// <param name="drink">the drink that will be updated</param>
         public void Update(Drink drink)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 var item = context.Drinks.Find(drink.Id);
                 if (item != null)
@@ -78,7 +73,7 @@ namespace ControllersVisual
         /// <param name="id">id of the wanted drink</param>
         public void Delete(int id)
         {
-            using (context)
+            using (context = new ShopContext())
             {
                 var item = context.Drinks.FirstOrDefault(m => m.Id == id);
                 if (item != null)
