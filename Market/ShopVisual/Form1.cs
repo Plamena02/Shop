@@ -129,6 +129,10 @@ namespace ShopVisual
             Clear();
             ReturnNumber = 2;
             ReturnPosition();
+            button13.Enabled = true;
+            button13.Visible = true;
+            button13.Location = new Point(100, 350);
+            BackgroundDesing();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -451,6 +455,78 @@ namespace ShopVisual
                 drinkController.Add(drink);
             }
             MessageBox.Show("The product was successfully added!");
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            label3.Text = "";
+
+            if (SectionNumber == 1)
+            {
+                var id = int.Parse(textBox1.Text);
+                var pastry = pastryController.GetPastryById(id);
+                if (pastry != null)
+                {
+                    pastryController.Delete(id);
+                    MessageBox.Show("The product was successfully deleted!");
+                }
+                else
+                {
+                    MessageBox.Show("The product was not found!");
+                }
+
+            }
+
+            if (SectionNumber == 2)
+            {
+                var id = int.Parse(textBox1.Text);
+                var fruitAndVegetbale = fruitAndVegetableController.GetFruitOrVegetableById(id);
+                if (fruitAndVegetbale != null)
+                {
+
+                    fruitAndVegetableController.Delete(id);
+                    MessageBox.Show("The product was successfully deleted!");
+                }
+
+                else
+                {
+                    MessageBox.Show("The product was not found!");
+                }
+            }
+
+            if (SectionNumber == 3)
+            {
+                var id = int.Parse(textBox1.Text);
+                var nut = nutController.GetNutById(id);
+                if (nutController != null)
+                {
+                    nutController.Delete(id);
+                    MessageBox.Show("The product was successfully deleted!");
+                }
+
+                else
+                {
+                    MessageBox.Show("The product was not found!");
+                }
+
+            }
+
+            if (SectionNumber == 4)
+            {
+                var id = int.Parse(textBox1.Text);
+                var drink = drinkController.GetDrinkById(id);
+                if (drink != null)
+                {
+
+                    drinkController.Delete(id);
+                    MessageBox.Show("The product was successfully deleted!");
+                }
+
+                else
+                {
+                    MessageBox.Show("The product was not found!");
+                }
+            }
         }
     }
 }
