@@ -27,8 +27,8 @@ namespace ShopVisual
             ShowMainMenu();
             label1.BringToFront();
             label2.SendToBack();
-            label2.Text = "Kolakak\nKolakak\nKolakak\nKolakak";
-
+            textBox1.Visible = false;
+            textBox1.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -94,7 +94,12 @@ namespace ShopVisual
         {
             Clear();
             ReturnNumber = 2;
+            label4.Text = "Enter ID:";
             ReturnPosition();
+            BackgroundDesing();
+            button11.Visible = true;
+            button11.Enabled = true;
+            button11.Location = new Point(100, 350);
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -102,6 +107,10 @@ namespace ShopVisual
             Clear();
             ReturnNumber = 2;
             ReturnPosition();
+            button12.Enabled = true;
+            button12.Visible = true;
+            button12.Location = new Point(100, 350);
+            BackgroundDesing();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -163,6 +172,7 @@ namespace ShopVisual
             button10.Location = new Point(245,301);
             this.Size = new System.Drawing.Size(494, 442);
             ReturnNumber = 1;
+            label2.Text = "Kolakak\nKolakak\nKolakak\nKolakak";
         }
 
         private void Clear()
@@ -176,6 +186,8 @@ namespace ShopVisual
             {
                 d.Visible = false;
             }
+            textBox1.Visible = false;
+            textBox1.Enabled = false;
         }
 
         private void ListAll(int num)
@@ -198,6 +210,7 @@ namespace ShopVisual
                 var frutsAndVegetables = fruitAndVegetableController.GetAllFruitsAndVegetables();
                 foreach (var item in frutsAndVegetables)
                 {
+                    label1.Location = new Point(60, 75);
                     label3.BackColor = Color.LimeGreen;
                     label3.Text += ($"    {item.Id} {item.Category} {item.Name} " +
                         $"{item.Price}lv/kg {item.Quantity}kg.\n\n");
@@ -215,10 +228,14 @@ namespace ShopVisual
             }
             if (num == 4)
             {
-                var drinks = drinkController.GetAllDrinks();
+                label2.Text = "Kolakak..\nKolakak..\nKolakak..\nKolakak..\nKolakak..\nKolakak..";
+                var drinks = drinkController.GetAllDrinks(); 
+                label1.Location = new Point(190, 75);
+                this.Size = new System.Drawing.Size(540, 660);
+                button10.Location = new Point(190, 570);
+                label3.BackColor = Color.DeepSkyBlue;
                 foreach (var item in drinks)
                 {
-                    label3.BackColor = Color.DeepSkyBlue;
                     label3.Text += ($"  {item.Id} {item.Category} {item.Name} " +
                         $"{item.Price}lv/pcs {item.Quantity}pcs.\n\n");
                 }
@@ -237,5 +254,144 @@ namespace ShopVisual
             label3.Visible = true;
         }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            label3.Text = "";
+            
+            if (SectionNumber == 1)
+            {
+                var id = int.Parse(textBox1.Text);
+                var pastry = pastryController.GetPastryById(id);
+                if (pastry != null)
+                {
+
+                    label3.Text += ("\n\n\n             ID: " + pastry.Id);
+                    label3.Text += ("\n             Category: " + pastry.Category);
+                    label3.Text += ("\n             Name: " + pastry.Name);
+                    label3.Text += ("\n             Price: " + pastry.Price + "lv/pcs");
+                    label3.Text += ("\n             Quantity: " + pastry.Quantity + "pcs.");
+
+                }
+                else
+                {
+                    MessageBox.Show("The product was not found!");
+                }
+            }
+            if (SectionNumber == 2)
+            {
+                var id = int.Parse(textBox1.Text);
+                var fruitAndVegetable = fruitAndVegetableController.GetFruitOrVegetableById(id);
+                if (fruitAndVegetable != null)
+                {
+
+                    label3.Text += ("\n\n\n             ID: " + fruitAndVegetable.Id);
+                    label3.Text += ("\n             Category: " + fruitAndVegetable.Category);
+                    label3.Text += ("\n             Name: " + fruitAndVegetable.Name);
+                    label3.Text += ("\n             Price: " + fruitAndVegetable.Price + "lv/pcs");
+                    label3.Text += ("\n             Quantity: " + fruitAndVegetable.Quantity + "pcs.");
+
+                }
+                else
+                {
+                    MessageBox.Show("The product was not found!");
+                }
+            }
+            if (SectionNumber == 3)
+            {
+                
+                var id = int.Parse(textBox1.Text);
+                var nut = nutController.GetNutById(id);
+                if (nut != null)
+                {
+
+                    label3.Text += ("\n\n\n             ID: " + nut.Id);
+                    label3.Text += ("\n             Category: " + nut.Category);
+                    label3.Text += ("\n             Name: " + nut.Name);
+                    label3.Text += ("\n             Price: " + nut.Price + "lv/pcs");
+                    label3.Text += ("\n             Quantity: " + nut.Quantity + "pcs.");
+
+                }
+                else
+                {
+                    MessageBox.Show("The product was not found!");
+                }
+            }
+            if (SectionNumber == 4)
+            {
+
+                var id = int.Parse(textBox1.Text);
+                var drink = drinkController.GetDrinkById(id);
+                if (drink != null)
+                {
+
+                    label3.Text += ("\n\n\n             ID: " + drink.Id);
+                    label3.Text += ("\n             Category: " + drink.Category);
+                    label3.Text += ("\n             Name: " + drink.Name);
+                    label3.Text += ("\n             Price: " + drink.Price + "lv/pcs");
+                    label3.Text += ("\n             Quantity: " + drink.Quantity + "pcs.");
+
+                }
+                else
+                {
+                    MessageBox.Show("The product was not found!");
+                }
+            }
+        }
+
+        private void BackgroundDesing()
+        {
+            label3.Text = "";
+            label4.Visible = true;
+            this.Size = new System.Drawing.Size(494, 460);
+            button10.Location = new Point(250, 350);
+            textBox1.Visible = true;
+            textBox1.Enabled = true;
+            label2.Text = "Kolakak\nKolakak\nKolakak\nKolakak";
+            textBox1.Text = "";
+            if (SectionNumber == 1)
+            {
+                label4.BackColor = Color.Gold;
+                textBox1.BackColor = Color.Gold;
+                label3.BackColor = Color.Gold;
+            }
+            if (SectionNumber == 2)
+            {
+                label4.BackColor = Color.LimeGreen;
+                textBox1.BackColor = Color.LimeGreen;
+                label3.BackColor = Color.LimeGreen;
+            }
+            if (SectionNumber == 3)
+            {
+                label4.BackColor = Color.MediumOrchid;
+                textBox1.BackColor = Color.MediumOrchid;
+                label3.BackColor = Color.MediumOrchid;
+            }
+            if (SectionNumber == 4)
+            {
+                label4.BackColor = Color.DeepSkyBlue;
+                textBox1.BackColor = Color.DeepSkyBlue;
+                label3.BackColor = Color.DeepSkyBlue;
+            }
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            if (SectionNumber==1)
+            {
+
+            }
+            if (SectionNumber == 2)
+            {
+
+            }
+            if (SectionNumber == 3)
+            {
+
+            }
+            if (SectionNumber == 4)
+            {
+
+            }
+        }
     }
 }
