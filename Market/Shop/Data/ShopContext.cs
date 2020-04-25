@@ -20,7 +20,7 @@ namespace Shop.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = .\\SQLEXPRESS; Database = Shop; Integrated Security = true ");
+            optionsBuilder.UseSqlServer("Server = .\\SQLEXPRESS01; Database = Shop; Integrated Security = true ");
         }
 
 

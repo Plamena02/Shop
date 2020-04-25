@@ -69,23 +69,23 @@
     <Compile Include="Controllers\FruitAndVegetableController.cs" />
     <Compile Include="Controllers\NutController.cs" />
     <Compile Include="Controllers\PastryController.cs" />
-    <Compile Include="DBModels.Context.cs">
+    <Compile Include="DBContext.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBModels.Context.tt</DependentUpon>
+      <DependentUpon>DBContext.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBModels.cs">
+    <Compile Include="DBContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="DBModels.Designer.cs">
+    <Compile Include="DBContext.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DBModels.edmx</DependentUpon>
+      <DependentUpon>DBContext.edmx</DependentUpon>
     </Compile>
     <Compile Include="Drink.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -94,13 +94,13 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="FruitsAndVegetable.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Nut.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Pastry.cs">
-      <DependentUpon>DBModels.tt</DependentUpon>
+      <DependentUpon>DBContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -117,12 +117,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EntityDeploy Include="DBModels.edmx">
+    <EntityDeploy Include="DBContext.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>DBModels.Designer.cs</LastGenOutput>
+      <LastGenOutput>DBContext.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DBModels.edmx.diagram">
-      <DependentUpon>DBModels.edmx</DependentUpon>
+    <None Include="DBContext.edmx.diagram">
+      <DependentUpon>DBContext.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -139,19 +139,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DBModels.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>DBModels.Context.cs</LastGenOutput>
-      <DependentUpon>DBModels.edmx</DependentUpon>
-    </Content>
-    <Content Include="DBModels.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>DBModels.edmx</DependentUpon>
-      <LastGenOutput>DBModels.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="DBContext.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBContext.edmx</DependentUpon>
+      <LastGenOutput>DBContext.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DBContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>DBContext.edmx</DependentUpon>
+      <LastGenOutput>DBContext.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

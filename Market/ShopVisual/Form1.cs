@@ -9,11 +9,12 @@ namespace ShopVisual
 {
     public partial class Form1 : Form
     {
-        private DrinkController drinkController = new DrinkController(new ShopEntities());
-        private NutController nutController = new NutController(new ShopEntities());
-        private FruitAndVegetableController fruitAndVegetableController = new FruitAndVegetableController(new ShopEntities());
-        private PastryController pastryController = new PastryController(new ShopEntities());
-        private int Number = 0;
+        private DrinkController drinkController = new DrinkController();
+        private NutController nutController = new NutController();
+        private FruitAndVegetableController fruitAndVegetableController = new FruitAndVegetableController();
+        private PastryController pastryController = new PastryController();
+        private int SectionNumber = 0;
+        private int ReturnNumber = 0;
 
         public Form1()
         {
@@ -39,7 +40,8 @@ namespace ShopVisual
             label1.ForeColor = Color.Gold;
             label2.BackColor = Color.Gold;
             label2.ForeColor = Color.Gold;
-            Number = 1;
+            SectionNumber = 1;
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -51,7 +53,7 @@ namespace ShopVisual
             label1.ForeColor = Color.MediumOrchid;
             label2.BackColor = Color.MediumOrchid;
             label2.ForeColor = Color.MediumOrchid;
-            Number = 3;
+            SectionNumber = 3;
 
         }
 
@@ -64,7 +66,7 @@ namespace ShopVisual
             label1.ForeColor = Color.LimeGreen;
             label2.BackColor = Color.LimeGreen;
             label2.ForeColor = Color.LimeGreen;
-            Number = 2;
+            SectionNumber = 2;
 
         }
 
@@ -77,40 +79,56 @@ namespace ShopVisual
             label1.ForeColor = Color.DeepSkyBlue;
             label2.BackColor = Color.DeepSkyBlue;
             label2.ForeColor = Color.DeepSkyBlue;
-            Number = 4;
+            SectionNumber = 4;
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
             Clear();
-            ListAll(Number);
+            ReturnNumber = 2;
+            ListAll(SectionNumber);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             Clear();
+            ReturnNumber = 2;
+            ReturnPosition();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             Clear();
+            ReturnNumber = 2;
+            ReturnPosition();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             Clear();
+            ReturnNumber = 2;
+            ReturnPosition();
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             Clear();
+            ReturnNumber = 2;
+            ReturnPosition();
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             Clear();
-            ShowMainMenu();
+            if (ReturnNumber == 1)
+            {
+                ShowMainMenu();
+            }
+            if (ReturnNumber == 2)
+            {
+                ShowSubMenu();
+            }
         }
 
         private void ShowMainMenu()
@@ -123,6 +141,7 @@ namespace ShopVisual
             button3.Visible = true;
             button4.Enabled = true;
             button4.Visible = true;
+            this.Size = new System.Drawing.Size(494, 442);
         }
 
         private void ShowSubMenu()
@@ -141,6 +160,9 @@ namespace ShopVisual
             button10.Visible = true;
             label1.Visible = true;
             label2.Visible = true;
+            button10.Location = new Point(245,301);
+            this.Size = new System.Drawing.Size(494, 442);
+            ReturnNumber = 1;
         }
 
         private void Clear()
@@ -158,14 +180,11 @@ namespace ShopVisual
 
         private void ListAll(int num)
         {
-            ListAllPosition();
-            var pastries = pastryController.GetAllPastries();
-            var frutsAndVegetables = fruitAndVegetableController.GetAllFruitsAndVegetables();
-            var nuts = nutController.GetAllNuts();
-            var drinks = drinkController.GetAllDrinks();
+            ReturnPosition();
             label3.Text = "";
             if (num == 1)
             {
+                var pastries = pastryController.GetAllPastries();
                 label1.Location = new Point(180, 75);
                 label3.BackColor = Color.Gold;
                 foreach (var item in pastries)
@@ -176,14 +195,17 @@ namespace ShopVisual
             }
             if (num == 2)
             {
+                var frutsAndVegetables = fruitAndVegetableController.GetAllFruitsAndVegetables();
                 foreach (var item in frutsAndVegetables)
                 {
+                    label3.BackColor = Color.LimeGreen;
                     label3.Text += ($"    {item.Id} {item.Category} {item.Name} " +
                         $"{item.Price}lv/kg {item.Quantity}kg.\n\n");
                 }
             }
             if (num == 3)
             {
+                var nuts = nutController.GetAllNuts();
                 foreach (var item in nuts)
                 {
                     label3.BackColor = Color.MediumOrchid;
@@ -193,19 +215,21 @@ namespace ShopVisual
             }
             if (num == 4)
             {
+                var drinks = drinkController.GetAllDrinks();
                 foreach (var item in drinks)
                 {
+                    label3.BackColor = Color.DeepSkyBlue;
                     label3.Text += ($"  {item.Id} {item.Category} {item.Name} " +
                         $"{item.Price}lv/pcs {item.Quantity}pcs.\n\n");
                 }
             }
         }
 
-        private void ListAllPosition()
+        private void ReturnPosition()
         {
-            label1.Visible = true;
-            label2.Visible = true;
             label2.Text = "Kolakak.\nKolakak.\nKolakak.\nKolakak.\nKolakak.\nKolakak.";
+            label2.Visible = true;
+            label1.Visible = true;
             this.Size = new System.Drawing.Size(515, 660);
             button10.Visible = true;
             button10.Enabled = true;
