@@ -109,8 +109,19 @@ namespace ShopVisual
             ReturnPosition();
             button12.Enabled = true;
             button12.Visible = true;
-            button12.Location = new Point(100, 350);
+            button12.Location = new Point(104, 351);
             BackgroundDesing();
+            label4.Text = "Enter category:";
+            label5.Visible = true;
+            label6.Visible = true;
+            label7.Visible = true;
+            textBox2.Visible = true;
+            textBox2.Enabled = true;
+            textBox3.Visible = true;
+            textBox3.Enabled = true;
+            textBox4.Visible = true;
+            textBox4.Enabled = true;
+            label4.Location = new Point(103,165);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -186,8 +197,11 @@ namespace ShopVisual
             {
                 d.Visible = false;
             }
-            textBox1.Visible = false;
-            textBox1.Enabled = false;
+            foreach (TextBox b in this.Controls.OfType<TextBox>())
+            {
+                b.Enabled = false;
+                b.Visible = false;
+            }
         }
 
         private void ListAll(int num)
@@ -351,26 +365,50 @@ namespace ShopVisual
             if (SectionNumber == 1)
             {
                 label4.BackColor = Color.Gold;
-                textBox1.BackColor = Color.Gold;
                 label3.BackColor = Color.Gold;
+                label5.BackColor = Color.Gold;
+                label6.BackColor = Color.Gold;
+                label7.BackColor = Color.Gold;
+                textBox1.BackColor = Color.Gold;
+                textBox2.BackColor = Color.Gold;
+                textBox3.BackColor = Color.Gold;
+                textBox4.BackColor = Color.Gold;
             }
             if (SectionNumber == 2)
             {
                 label4.BackColor = Color.LimeGreen;
-                textBox1.BackColor = Color.LimeGreen;
                 label3.BackColor = Color.LimeGreen;
+                textBox1.BackColor = Color.LimeGreen;
+                label5.BackColor = Color.LimeGreen;
+                label6.BackColor = Color.LimeGreen;
+                label7.BackColor = Color.LimeGreen;
+                textBox2.BackColor = Color.LimeGreen;
+                textBox3.BackColor = Color.LimeGreen;
+                textBox4.BackColor = Color.LimeGreen;
             }
             if (SectionNumber == 3)
             {
                 label4.BackColor = Color.MediumOrchid;
-                textBox1.BackColor = Color.MediumOrchid;
                 label3.BackColor = Color.MediumOrchid;
+                textBox1.BackColor = Color.MediumOrchid;
+                label5.BackColor = Color.MediumOrchid;
+                label6.BackColor = Color.MediumOrchid;
+                label7.BackColor = Color.MediumOrchid;
+                textBox2.BackColor = Color.MediumOrchid;
+                textBox3.BackColor = Color.MediumOrchid;
+                textBox4.BackColor = Color.MediumOrchid;
             }
             if (SectionNumber == 4)
             {
                 label4.BackColor = Color.DeepSkyBlue;
-                textBox1.BackColor = Color.DeepSkyBlue;
                 label3.BackColor = Color.DeepSkyBlue;
+                textBox1.BackColor = Color.DeepSkyBlue;
+                label5.BackColor = Color.DeepSkyBlue;
+                label6.BackColor = Color.DeepSkyBlue;
+                label7.BackColor = Color.DeepSkyBlue;
+                textBox2.BackColor = Color.DeepSkyBlue;
+                textBox3.BackColor = Color.DeepSkyBlue;
+                textBox4.BackColor = Color.DeepSkyBlue;
             }
         }
 
@@ -378,20 +416,41 @@ namespace ShopVisual
         {
             if (SectionNumber==1)
             {
-
+                Pastry pastry = new Pastry();
+                pastry.Category = textBox1.Text;
+                pastry.Name = textBox2.Text;
+                pastry.Price = decimal.Parse(textBox3.Text);
+                pastry.Quantity = int.Parse(textBox4.Text);
+                pastryController.Add(pastry);
             }
             if (SectionNumber == 2)
             {
-
+                FruitsAndVegetable fruitsAndVegetable = new FruitsAndVegetable();
+                fruitsAndVegetable.Category = textBox1.Text;
+                fruitsAndVegetable.Name = textBox2.Text;
+                fruitsAndVegetable.Price = decimal.Parse(textBox3.Text);
+                fruitsAndVegetable.Quantity = int.Parse(textBox4.Text);
+                fruitAndVegetableController.Add(fruitsAndVegetable);
             }
             if (SectionNumber == 3)
             {
-
+                Nut nut = new Nut();
+                nut.Category = textBox1.Text;
+                nut.Name = textBox2.Text;
+                nut.Price = decimal.Parse(textBox3.Text);
+                nut.Quantity = int.Parse(textBox4.Text);
+                nutController.Add(nut);
             }
             if (SectionNumber == 4)
             {
-
+                Drink drink = new Drink();
+                drink.Category = textBox1.Text;
+                drink.Name = textBox2.Text;
+                drink.Price = decimal.Parse(textBox3.Text);
+                drink.Quantity = int.Parse(textBox4.Text);
+                drinkController.Add(drink);
             }
+            MessageBox.Show("The product was successfully added!");
         }
     }
 }
