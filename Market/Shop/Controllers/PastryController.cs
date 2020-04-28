@@ -1,5 +1,4 @@
-﻿
-using Shop.Data;
+﻿using Shop.Data;
 using Shop.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,15 +23,19 @@ namespace Shop.Controllers
             context = shopContext;
         }
         /// <summary>
-        /// Gives all Pastries in the database.
+        /// 
+        /// </summary>
+        public PastryController()
+        {
+            context = new ShopContext();
+        }
+        /// <summary>
+        /// Gives all Pastry in the database.
         /// </summary>
         /// <returns>all pastries from the database</returns>
         public List<Pastry> GetAllPastries()
         {
-            using (context)
-            {
                 return context.Pastries.ToList();
-            }
         }
 
         /// <summary>
@@ -42,10 +45,7 @@ namespace Shop.Controllers
         /// <returns>a pastry with that id</returns>
         public Pastry GetPastryById(int id)
         {
-            using (context)
-            {
                 return context.Pastries.FirstOrDefault(m => m.Id == id);
-            }
         }
 
         /// <summary>
@@ -54,11 +54,8 @@ namespace Shop.Controllers
         /// <param name="pastry">the pastry that will be added</param>
         public void Add(Pastry pastry)
         {
-            using (context)
-            {
                 context.Pastries.Add(pastry);
                 context.SaveChanges();
-            }
         }
 
         /// <summary>
@@ -67,15 +64,12 @@ namespace Shop.Controllers
         /// <param name="pastry">the pastry that will be updated</param>
         public void Update(Pastry pastry)
         {
-            using (context)
-            {
                 var item = context.Pastries.Find(pastry.Id);
                 if (item != null)
                 {
                     context.Entry(item).CurrentValues.SetValues(pastry);
                     context.SaveChanges();
                 }
-            }
         }
 
         /// <summary>
@@ -84,16 +78,12 @@ namespace Shop.Controllers
         /// <param name="id">Id of the wanted pastry</param>
         public void Delete(int id)
         {
-            using (context)
-            {
                 var item = context.Pastries.FirstOrDefault(m => m.Id == id);
                 if (item != null)
                 {
                     context.Pastries.Remove(item);
                     context.SaveChanges();
                 }
-            }
         }
     }
 }
-

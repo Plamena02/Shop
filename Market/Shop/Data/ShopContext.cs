@@ -17,10 +17,11 @@ namespace Shop.Data
         public virtual DbSet<Nut> Nuts { get; set; }
         public virtual DbSet<Pastry> Pastries { get; set; }
         public virtual DbSet<Drink> Drinks { get; set; }
+        public virtual DbSet<AnimalProduct> AnimalProducts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server = .\\SQLEXPRESS01; Database = Shop; Integrated Security = true ");
+            optionsBuilder.UseSqlServer("Server = .\\SQLEXPRESS; Database = Shop; Integrated Security = true ");
         }
 
 

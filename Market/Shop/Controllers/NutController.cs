@@ -14,21 +14,28 @@ namespace Shop.Controllers
         /// Database link.
         /// </summary>
         private ShopContext context;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shopContext"></param>
         public NutController(ShopContext shopContext)
         {
             context = shopContext;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        public NutController()
+        {
+            context = new ShopContext();
+        }
         /// <summary>
         /// Gives all Nuts in the database.
         /// </summary>
         /// <returns>all nuts from the database</returns>
         public List<Nut> GetAllNuts()
         {
-            using (context)
-            {
                 return context.Nuts.ToList();
-            }
         }
 
         /// <summary>
@@ -36,12 +43,9 @@ namespace Shop.Controllers
         /// </summary>
         /// <param name="id">Id of the wanted nut</param>
         /// <returns>a nut with that id</returns>
-        public Nut GetNutById(int id) 
+        public Nut GetNutById(int id)
         {
-            using (context)
-            {
                 return context.Nuts.FirstOrDefault(m => m.Id == id);
-            }
         }
 
         /// <summary>
@@ -50,11 +54,8 @@ namespace Shop.Controllers
         /// <param name="nut">the nut that will be added</param>
         public void Add(Nut nut)
         {
-            using (context)
-            {
                 context.Nuts.Add(nut);
                 context.SaveChanges();
-            }
         }
 
         /// <summary>
@@ -63,15 +64,12 @@ namespace Shop.Controllers
         /// <param name="nut">the nut that will be updated</param>
         public void Update(Nut nut)
         {
-            using (context)
-            {
                 var item = context.Drinks.Find(nut.Id);
                 if (item != null)
                 {
                     context.Entry(item).CurrentValues.SetValues(nut);
                     context.SaveChanges();
                 }
-            }
         }
 
         /// <summary>
@@ -80,16 +78,12 @@ namespace Shop.Controllers
         /// <param name="id">Id of the wanted nut</param>
         public void Delete(int id)
         {
-            using (context)
-            {
                 var item = context.Nuts.FirstOrDefault(m => m.Id == id);
                 if (item != null)
                 {
                     context.Nuts.Remove(item);
                     context.SaveChanges();
                 }
-
-            }
         }
 
     }

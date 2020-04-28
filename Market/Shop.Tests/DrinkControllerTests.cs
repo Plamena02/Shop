@@ -73,7 +73,7 @@ namespace Shop.Tests
             var mockContext = new Mock<ShopContext>();
             mockContext.Setup(c => c.Drinks).Returns(mockSet.Object);
 
-            var controller = new DrinkController(mockContext.Object); 
+            var controller = new DrinkController(mockContext.Object);
 
             var drink = controller.GetDrinkById(1);
             Assert.AreEqual(1, drink.Id);
@@ -95,7 +95,6 @@ namespace Shop.Tests
             mockSet.As<IQueryable<Drink>>().Setup(m => m.ElementType).Returns(data.ElementType);
             mockSet.As<IQueryable<Drink>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
 
-            
             var mockContext = new Mock<ShopContext>();
             mockContext.Setup(x => x.Drinks).Returns(mockSet.Object);
 

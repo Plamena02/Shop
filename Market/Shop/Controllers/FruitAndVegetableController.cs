@@ -14,9 +14,20 @@ namespace Shop.Controllers
         /// Database link.
         /// </summary>
         private ShopContext context;
-        public FruitAndVegetableController(ShopContext shopContext)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="shopcontext"></param>
+        public FruitAndVegetableController(ShopContext shopcontext)
         {
-            context = shopContext;
+            context = shopcontext;
+        }
+        /// <summary>
+        /// 
+        /// </summary>
+        public FruitAndVegetableController()
+        {
+            context = new ShopContext();
         }
         /// <summary>
         /// Gives all fruits and vegetables in the database.
@@ -24,10 +35,7 @@ namespace Shop.Controllers
         /// <returns>all fruits and vegetables from the database</returns>
         public List<FruitAndVegetable> GetAllFruitsAndVegetables()
         {
-            using (context)
-            {
                 return context.FruitsAndVegetables.ToList();
-            }
         }
 
         /// <summary>
@@ -37,10 +45,7 @@ namespace Shop.Controllers
         /// <returns>a fruit or vegetable with that id</returns>
         public FruitAndVegetable GetFruitOrVegetableById(int id)
         {
-            using (context)
-            {
                 return context.FruitsAndVegetables.FirstOrDefault(m => m.Id == id);
-            }
         }
 
         /// <summary>
@@ -49,11 +54,8 @@ namespace Shop.Controllers
         /// <param name="fruitORvegetable">the fruit or vegetable that will be added.</param>
         public void Add(FruitAndVegetable fruitORvegetable)
         {
-            using (context)
-            {
                 context.FruitsAndVegetables.Add(fruitORvegetable);
                 context.SaveChanges();
-            }
         }
 
         /// <summary>
@@ -62,15 +64,12 @@ namespace Shop.Controllers
         /// <param name="fruitORvegetable">the fruit or vegetable that will be updated.</param>
         public void Update(FruitAndVegetable fruitORvegetable)
         {
-            using (context)
-            {
                 var item = context.FruitsAndVegetables.Find(fruitORvegetable.Id);
                 if (item != null)
                 {
                     context.Entry(item).CurrentValues.SetValues(fruitORvegetable);
                     context.SaveChanges();
                 }
-            }
         }
 
         /// <summary>
@@ -79,15 +78,12 @@ namespace Shop.Controllers
         /// <param name="id">Id of the wanted fruit or vegetable.</param>
         public void Delete(int id)
         {
-            using (context)
-            {
                 var item = context.FruitsAndVegetables.FirstOrDefault(m => m.Id == id);
                 if (item != null)
                 {
                     context.FruitsAndVegetables.Remove(item);
                     context.SaveChanges();
                 }
-            }
         }
     }
 }

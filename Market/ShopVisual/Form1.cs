@@ -95,6 +95,7 @@ namespace ShopVisual
             Clear();
             ReturnNumber = 2;
             label4.Text = "Enter ID:";
+            label4.Location = new Point(125, 165);
             ReturnPosition();
             BackgroundDesing();
             button11.Visible = true;
@@ -129,6 +130,8 @@ namespace ShopVisual
             Clear();
             ReturnNumber = 2;
             ReturnPosition();
+            label4.Text = "Enter ID:";
+            label4.Location = new Point(125, 165);
             button13.Enabled = true;
             button13.Visible = true;
             button13.Location = new Point(100, 350);
@@ -140,6 +143,39 @@ namespace ShopVisual
             Clear();
             ReturnNumber = 2;
             ReturnPosition();
+            BackgroundDesing();
+            button14.Enabled = true;
+            button14.Visible = true;
+            button14.Location = new Point(100, 530);
+            button10.Location = new Point(250, 530);
+            this.Size = new System.Drawing.Size(515, 660);
+            label4.Text = "Enter ID:";
+            label5.Location = new Point(100, 380);
+            label5.Visible = true;
+            label6.Visible = true;
+            label7.Visible = true;
+            label8.Visible = true;
+            textBox2.Visible = true;
+            textBox2.Location = new Point(250, 380);
+            textBox2.Enabled = true;
+            textBox3.Visible = true;
+            textBox3.Enabled = true;
+            textBox4.Visible = true;
+            textBox4.Enabled = true;
+            textBox5.Enabled = true;
+            textBox5.Visible = true;
+            label4.Location = new Point(105, 150);
+            textBox1.Location = new Point(230, 150);
+            label6.Location = new Point(100, 420);
+            textBox3.Location = new Point(250, 420);
+            label7.Location = new Point(100, 460);
+            textBox4.Location = new Point(280, 460);
+            label8.Location = new Point(100, 340);
+            textBox5.Location = new Point(280, 340);
+            button11.Visible = true;
+            button11.Enabled = true;
+            button11.Location = new Point(240,220);
+            label2.Text = "Kolakak\nKolakak\nKolakak\nKolakak\nKolakak\nKolakak";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -153,6 +189,11 @@ namespace ShopVisual
             {
                 ShowSubMenu();
             }
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
         }
 
         private void ShowMainMenu()
@@ -418,6 +459,7 @@ namespace ShopVisual
 
         private void button12_Click(object sender, EventArgs e)
         {
+
             if (SectionNumber==1)
             {
                 Pastry pastry = new Pastry();
@@ -487,7 +529,6 @@ namespace ShopVisual
                     fruitAndVegetableController.Delete(id);
                     MessageBox.Show("The product was successfully deleted!");
                 }
-
                 else
                 {
                     MessageBox.Show("The product was not found!");
@@ -503,12 +544,10 @@ namespace ShopVisual
                     nutController.Delete(id);
                     MessageBox.Show("The product was successfully deleted!");
                 }
-
                 else
                 {
                     MessageBox.Show("The product was not found!");
                 }
-
             }
 
             if (SectionNumber == 4)
@@ -521,12 +560,17 @@ namespace ShopVisual
                     drinkController.Delete(id);
                     MessageBox.Show("The product was successfully deleted!");
                 }
-
                 else
                 {
                     MessageBox.Show("The product was not found!");
                 }
             }
         }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            
+        }
+
     }
 }
