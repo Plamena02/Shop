@@ -4,6 +4,8 @@ using System.Linq;
 using Microsoft.SqlServer;
 using System.Windows.Forms;
 using ShopVisual.Controllers;
+using System.Threading;
+
 
 namespace ShopVisual
 {
@@ -18,9 +20,18 @@ namespace ShopVisual
 
         public Form1()
         {
+            Thread t = new Thread(new ThreadStart(SplashStart));
+            t.Start();
+            Thread.Sleep(5000);
             InitializeComponent();
+            t.Abort();this.BringToFront();
+            
         }
 
+        public void SplashStart()
+        {
+            Application.Run(new SplashScreen());
+        }
         private void Form1_Load(object sender, EventArgs e)
         {
             Clear();
@@ -41,7 +52,7 @@ namespace ShopVisual
             label2.BackColor = Color.Gold;
             label2.ForeColor = Color.Gold;
             SectionNumber = 1;
-            
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -87,6 +98,7 @@ namespace ShopVisual
         {
             Clear();
             ReturnNumber = 2;
+            label3.Location = new Point(57, 150);
             ListAll(SectionNumber);
         }
 
@@ -95,7 +107,9 @@ namespace ShopVisual
             Clear();
             ReturnNumber = 2;
             label4.Text = "Enter ID:";
-            label4.Location = new Point(125, 165);
+            label4.Location = new Point(125,150);
+            label3.Location = new Point(125,200);
+            textBox1.Location = new Point(230, 150);
             ReturnPosition();
             BackgroundDesing();
             button11.Visible = true;
@@ -122,7 +136,15 @@ namespace ShopVisual
             textBox3.Enabled = true;
             textBox4.Visible = true;
             textBox4.Enabled = true;
-            label4.Location = new Point(103,165);
+            label4.Location = new Point(100, 160);
+            textBox1.Location = new Point(265, 160);
+            label5.Location = new Point(100, 200);
+            textBox2.Location = new Point(250, 200);
+            label6.Location = new Point(100, 240);
+            textBox3.Location = new Point(250, 240);
+            label7.Location = new Point(100, 280);
+            textBox4.Location = new Point(280, 280);
+            textBox1.Width = 110;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -131,10 +153,13 @@ namespace ShopVisual
             ReturnNumber = 2;
             ReturnPosition();
             label4.Text = "Enter ID:";
-            label4.Location = new Point(125, 165);
+            label4.Location = new Point(125,160);
+            label3.Location = new Point(125,200);
+            textBox1.Location = new Point(230, 160);
             button13.Enabled = true;
             button13.Visible = true;
             button13.Location = new Point(100, 350);
+            textBox1.Width = 110;
             BackgroundDesing();
         }
 
@@ -164,8 +189,9 @@ namespace ShopVisual
             textBox4.Enabled = true;
             textBox5.Enabled = true;
             textBox5.Visible = true;
-            label4.Location = new Point(105, 150);
-            textBox1.Location = new Point(230, 150);
+            textBox1.Width = 40;
+            label4.Location = new Point(100, 150);
+            textBox1.Location = new Point(200, 150);
             label6.Location = new Point(100, 420);
             textBox3.Location = new Point(250, 420);
             label7.Location = new Point(100, 460);
@@ -174,8 +200,9 @@ namespace ShopVisual
             textBox5.Location = new Point(280, 340);
             button11.Visible = true;
             button11.Enabled = true;
-            button11.Location = new Point(240,220);
+            button11.Location = new Point(255, 140);
             label2.Text = "Kolakak\nKolakak\nKolakak\nKolakak\nKolakak\nKolakak";
+            label3.Location = new Point(100, 200);
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -225,7 +252,7 @@ namespace ShopVisual
             button10.Visible = true;
             label1.Visible = true;
             label2.Visible = true;
-            button10.Location = new Point(245,301);
+            button10.Location = new Point(245, 301);
             this.Size = new System.Drawing.Size(494, 442);
             ReturnNumber = 1;
             label2.Text = "Kolakak\nKolakak\nKolakak\nKolakak";
@@ -288,7 +315,7 @@ namespace ShopVisual
             if (num == 4)
             {
                 label2.Text = "Kolakak..\nKolakak..\nKolakak..\nKolakak..\nKolakak..\nKolakak..";
-                var drinks = drinkController.GetAllDrinks(); 
+                var drinks = drinkController.GetAllDrinks();
                 label1.Location = new Point(190, 75);
                 this.Size = new System.Drawing.Size(540, 660);
                 button10.Location = new Point(190, 570);
@@ -316,7 +343,7 @@ namespace ShopVisual
         private void button11_Click(object sender, EventArgs e)
         {
             label3.Text = "";
-            
+
             if (SectionNumber == 1)
             {
                 var id = int.Parse(textBox1.Text);
@@ -324,11 +351,11 @@ namespace ShopVisual
                 if (pastry != null)
                 {
 
-                    label3.Text += ("\n\n\n             ID: " + pastry.Id);
-                    label3.Text += ("\n             Category: " + pastry.Category);
-                    label3.Text += ("\n             Name: " + pastry.Name);
-                    label3.Text += ("\n             Price: " + pastry.Price + "lv/pcs");
-                    label3.Text += ("\n             Quantity: " + pastry.Quantity + "pcs.");
+                    label3.Text += ("ID: " + pastry.Id);
+                    label3.Text += ("\nCategory: " + pastry.Category);
+                    label3.Text += ("\nName: " + pastry.Name);
+                    label3.Text += ("\nPrice: " + pastry.Price + "lv/pcs");
+                    label3.Text += ("\nQuantity: " + pastry.Quantity + "pcs.");
 
                 }
                 else
@@ -343,11 +370,11 @@ namespace ShopVisual
                 if (fruitAndVegetable != null)
                 {
 
-                    label3.Text += ("\n\n\n             ID: " + fruitAndVegetable.Id);
-                    label3.Text += ("\n             Category: " + fruitAndVegetable.Category);
-                    label3.Text += ("\n             Name: " + fruitAndVegetable.Name);
-                    label3.Text += ("\n             Price: " + fruitAndVegetable.Price + "lv/pcs");
-                    label3.Text += ("\n             Quantity: " + fruitAndVegetable.Quantity + "pcs.");
+                    label3.Text += ("ID: " + fruitAndVegetable.Id);
+                    label3.Text += ("\nCategory: " + fruitAndVegetable.Category);
+                    label3.Text += ("\nName: " + fruitAndVegetable.Name);
+                    label3.Text += ("\nPrice: " + fruitAndVegetable.Price + "lv/pcs");
+                    label3.Text += ("\nQuantity: " + fruitAndVegetable.Quantity + "pcs.");
 
                 }
                 else
@@ -357,17 +384,17 @@ namespace ShopVisual
             }
             if (SectionNumber == 3)
             {
-                
+
                 var id = int.Parse(textBox1.Text);
                 var nut = nutController.GetNutById(id);
                 if (nut != null)
                 {
 
-                    label3.Text += ("\n\n\n             ID: " + nut.Id);
-                    label3.Text += ("\n             Category: " + nut.Category);
-                    label3.Text += ("\n             Name: " + nut.Name);
-                    label3.Text += ("\n             Price: " + nut.Price + "lv/pcs");
-                    label3.Text += ("\n             Quantity: " + nut.Quantity + "pcs.");
+                    label3.Text += ("ID: " + nut.Id);
+                    label3.Text += ("\nCategory: " + nut.Category);
+                    label3.Text += ("\nName: " + nut.Name);
+                    label3.Text += ("\nPrice: " + nut.Price + "lv/pcs");
+                    label3.Text += ("\nQuantity: " + nut.Quantity + "pcs.");
 
                 }
                 else
@@ -383,11 +410,11 @@ namespace ShopVisual
                 if (drink != null)
                 {
 
-                    label3.Text += ("\n\n\n             ID: " + drink.Id);
-                    label3.Text += ("\n             Category: " + drink.Category);
-                    label3.Text += ("\n             Name: " + drink.Name);
-                    label3.Text += ("\n             Price: " + drink.Price + "lv/pcs");
-                    label3.Text += ("\n             Quantity: " + drink.Quantity + "pcs.");
+                    label3.Text += ("ID: " + drink.Id);
+                    label3.Text += ("\nCategory: " + drink.Category);
+                    label3.Text += ("\nName: " + drink.Name);
+                    label3.Text += ("\nPrice: " + drink.Price + "lv/pcs");
+                    label3.Text += ("\nQuantity: " + drink.Quantity + "pcs.");
 
                 }
                 else
@@ -418,6 +445,8 @@ namespace ShopVisual
                 textBox2.BackColor = Color.Gold;
                 textBox3.BackColor = Color.Gold;
                 textBox4.BackColor = Color.Gold;
+                label8.BackColor = Color.Gold;
+                textBox5.BackColor = Color.Gold;
             }
             if (SectionNumber == 2)
             {
@@ -430,6 +459,8 @@ namespace ShopVisual
                 textBox2.BackColor = Color.LimeGreen;
                 textBox3.BackColor = Color.LimeGreen;
                 textBox4.BackColor = Color.LimeGreen;
+                label8.BackColor = Color.LimeGreen;
+                textBox5.BackColor = Color.LimeGreen;
             }
             if (SectionNumber == 3)
             {
@@ -442,6 +473,8 @@ namespace ShopVisual
                 textBox2.BackColor = Color.MediumOrchid;
                 textBox3.BackColor = Color.MediumOrchid;
                 textBox4.BackColor = Color.MediumOrchid;
+                label8.BackColor = Color.MediumOrchid;
+                textBox5.BackColor = Color.MediumOrchid;
             }
             if (SectionNumber == 4)
             {
@@ -454,13 +487,15 @@ namespace ShopVisual
                 textBox2.BackColor = Color.DeepSkyBlue;
                 textBox3.BackColor = Color.DeepSkyBlue;
                 textBox4.BackColor = Color.DeepSkyBlue;
+                label8.BackColor = Color.DeepSkyBlue;
+                textBox5.BackColor = Color.DeepSkyBlue;
             }
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
 
-            if (SectionNumber==1)
+            if (SectionNumber == 1)
             {
                 Pastry pastry = new Pastry();
                 pastry.Category = textBox1.Text;
@@ -569,6 +604,49 @@ namespace ShopVisual
 
         private void button14_Click(object sender, EventArgs e)
         {
+            if (SectionNumber == 1)
+            {
+                int id = int.Parse(textBox1.Text);
+                var pastry = pastryController.GetPastryById(id);
+                pastry.Category = textBox5.Text;
+                pastry.Name = textBox2.Text;
+                pastry.Price = decimal.Parse(textBox3.Text);
+                pastry.Quantity = int.Parse(textBox4.Text);
+                pastryController.Update(pastry);
+            }
+            if (SectionNumber == 2)
+            {
+                int id = int.Parse(textBox1.Text);
+                var fruitsAndVegetable = fruitAndVegetableController.GetFruitOrVegetableById(id);
+                fruitsAndVegetable.Category = textBox5.Text;
+                fruitsAndVegetable.Name = textBox2.Text;
+                fruitsAndVegetable.Price = decimal.Parse(textBox3.Text);
+                fruitsAndVegetable.Quantity = int.Parse(textBox4.Text);
+                fruitAndVegetableController.Update(fruitsAndVegetable);
+            }
+
+            if (SectionNumber == 3)
+            {
+                int id = int.Parse(textBox1.Text);
+                var nut = nutController.GetNutById(id);
+                nut.Category = textBox5.Text;
+                nut.Name = textBox2.Text;
+                nut.Price = decimal.Parse(textBox3.Text);
+                nut.Quantity = int.Parse(textBox4.Text);
+                nutController.Update(nut);
+            }
+        
+            if (SectionNumber == 4)
+            {
+                int id = int.Parse(textBox1.Text);
+                var drink = drinkController.GetDrinkById(id);
+                drink.Category = textBox5.Text;
+                drink.Name = textBox2.Text;
+                drink.Price = decimal.Parse(textBox3.Text);
+                drink.Quantity = int.Parse(textBox4.Text);
+                drinkController.Update(drink);
+            } 
+                MessageBox.Show("The product was updated successfully!");
             
         }
 
