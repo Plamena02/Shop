@@ -24,8 +24,7 @@ namespace ShopVisual
             t.Start();
             Thread.Sleep(5000);
             InitializeComponent();
-            t.Abort();this.BringToFront();
-            
+            t.Abort();        
         }
 
         public void SplashStart()
