@@ -64,7 +64,7 @@ namespace Shop.Controllers
         /// <param name="nut">the nut that will be updated</param>
         public void Update(Nut nut)
         {
-                var item = context.Drinks.Find(nut.Id);
+                var item = context.Drinks.FirstOrDefault(m => m.Id == nut.Id);
                 if (item != null)
                 {
                     context.Entry(item).CurrentValues.SetValues(nut);
