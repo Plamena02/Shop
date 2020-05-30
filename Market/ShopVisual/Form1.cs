@@ -573,7 +573,7 @@ namespace ShopVisual
             {
                 var id = int.Parse(textBox1.Text);
                 var nut = nutController.GetNutById(id);
-                if (nutController != null)
+                if (nut != null)
                 {
                     nutController.Delete(id);
                     MessageBox.Show("The product was successfully deleted!");
